@@ -69,8 +69,6 @@ export const Details = observer(() => {
       const isoDate = day && month && year ? `${year}-${month}-${day}T00:00:00Z` : '';
 
       await companyStore.updateCompany({
-        name: editedData.name,
-        shortName: editedData.shortName,
         contract: {
           no: editedData.contract.no,
           issue_date: isoDate

@@ -29,15 +29,12 @@ class CompanyStore {
     this.setContact(contact);
   }
 
-  async updateCompany(data: Partial<CompanyUpdateData>): Promise<void> {
+  async updateCompany(data: CompanyUpdateData): Promise<void> {
     if (!this.company) {
       return;
     }
 
-    const updatedCompany = await api.updateCompany(this.company.id, {
-      ...this.company,
-        ...data,
-    });
+    const updatedCompany = await api.updateCompany(this.company.id, data);
     this.setCompany(updatedCompany);
   }
 

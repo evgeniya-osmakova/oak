@@ -33,14 +33,14 @@ export interface Photo {
 }
 
 export interface CompanyUpdateData {
-  name: string;
-  shortName: string;
-  businessEntity: string;
-  contract: {
+  name?: string;
+  shortName?: string;
+  businessEntity?: string;
+  contract?: {
     no: string;
     issue_date: string;
   };
-  type: string[];
+  type?: string[];
 }
 
 export interface ContactUpdateData {
