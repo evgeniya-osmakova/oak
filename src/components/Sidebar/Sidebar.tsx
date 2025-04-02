@@ -1,9 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Icon } from '../Icon/Icon';
 import './Sidebar.scss';
 
 export const Sidebar = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node)) {
+        setExpandedSection(null);
+      }
+    };
+
+    if (expandedSection) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [expandedSection]);
 
   const toggleSection = (section: string) => {
     if (expandedSection === section) {
@@ -14,7 +31,10 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar__container">
+    <div
+      className="sidebar__container"
+      ref={sidebarRef}
+    >
       <aside className="sidebar__main">
         <div className="sidebar__icons">
           <div className="sidebar__logo">

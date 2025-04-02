@@ -10,6 +10,7 @@ interface EditedData {
   lastname: string;
   phone: string;
   email: string;
+  fullName: string;
 }
 
 export const Contacts = observer(() => {
@@ -18,7 +19,8 @@ export const Contacts = observer(() => {
     firstname: '',
     lastname: '',
     phone: '',
-    email: ''
+    email: '',
+    fullName: '',
   });
 
   const contact = companyStore.contact;
@@ -29,7 +31,8 @@ export const Contacts = observer(() => {
         firstname: contact.firstname || '',
         lastname: contact.lastname || '',
         phone: contact.phone || '',
-        email: contact.email || ''
+        email: contact.email || '',
+        fullName: `${contact.firstname} ${contact.lastname}`,
       });
     }
     setIsEditing(true);
@@ -37,9 +40,14 @@ export const Contacts = observer(() => {
 
   const handleSave = () => {
     if (contact) {
+      const [firstname, lastname] = editedData.fullName.trim().split(' ');
+
       companyStore.updateContact({
         ...contact,
-        ...editedData
+        firstname: firstname || '',
+        lastname: lastname || '',
+        phone: editedData.phone || '',
+        email: editedData.email || '',
       });
     }
     setIsEditing(false);
@@ -72,21 +80,12 @@ export const Contacts = observer(() => {
     >
       <div className="content__item">
         {isEditing ? (
-          <div className="content__input-row">
-            <Input
-              label="Responsible person:"
-              value={editedData.firstname}
-              onValueChange={handleChange('firstname')}
-              placeholder="First name"
-            />
-
-            <Input
-              label=""
-              value={editedData.lastname}
-              onValueChange={handleChange('lastname')}
-              placeholder="Last name"
-            />
-          </div>
+          <Input
+            label="Responsible person:"
+            value={editedData.fullName}
+            onValueChange={handleChange('fullName')}
+            placeholder="Full name"
+          />
         ) : (
           <>
             <span className="content__label">
