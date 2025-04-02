@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { companyStore } from '../../stores/CompanyStore';
 import { COMPANY_ID, CONTACT_ID } from '../../constants/ids';
-import { Icon } from '../common/Icon/Icon';
 import { Details } from './CardComponents/Details'
 import { Contacts } from './CardComponents/Contacts'
 import { Photos } from './CardComponents/Photos'
 import { EditNameModal } from './EditNameModal/EditNameModal'
 import { IconButton } from '../../components/common/IconButton/IconButton';
+import { DeleteCompanyModal } from './DeleteCompanyModal/DeleteCompanyModal';
 
 import './CompanyInfo.scss';
 
 export const CompanyInfo = observer(() => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [editError, setEditError] = useState<string | null>(null);
 
@@ -49,6 +52,18 @@ export const CompanyInfo = observer(() => {
     setIsEditModalOpen(false);
   };
 
+  const handleDelete = async () => {
+    try {
+      setIsDeleting(true);
+      setDeleteError(null);
+      await companyStore.deleteCompany();
+    } catch (error) {
+      setDeleteError('Failed to delete organization. Please try again.');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <div className="company__info">
       <div className="company__header">
@@ -62,15 +77,15 @@ export const CompanyInfo = observer(() => {
 
         <div className="company__actions">
           <IconButton
-              iconName="edit"
-              iconSize={20}
-              onClick={() => setIsEditModalOpen(true)}
+            iconName="edit"
+            iconSize={20}
+            onClick={() => setIsEditModalOpen(true)}
           />
 
           <IconButton
-              iconName="delete"
-              iconSize={20}
-              onClick={() => true}
+            iconName="delete"
+            iconSize={20}
+            onClick={() => setIsDeleteModalOpen(true)}
           />
         </div>
       </div>
@@ -86,6 +101,14 @@ export const CompanyInfo = observer(() => {
         initialName={companyStore.company.name}
         isSaving={isSaving}
         error={editError}
+      />
+
+      <DeleteCompanyModal
+        isOpen={isDeleteModalOpen}
+        onClose={() => setIsDeleteModalOpen(false)}
+        onConfirm={handleDelete}
+        isLoading={isDeleting}
+        error={deleteError}
       />
     </div>
   );

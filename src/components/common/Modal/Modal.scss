@@ -42,23 +42,23 @@
     text-align: center;
   }
 
-  &__close {
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    border: none;
-    background: none;
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.5);
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: rgba(0, 0, 0, 0.8);
-    }
-  }
-
   &__body {
     flex: 1;
     overflow-y: auto;
+  }
+
+  @keyframes modal-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__content {
+    animation: modal-fade-in 0.2s ease-out;
   }
 }

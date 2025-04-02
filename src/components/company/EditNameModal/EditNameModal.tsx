@@ -48,12 +48,6 @@ export const EditNameModal: React.FC<EditNameModalProps> = ({
           disabled={isSaving}
         />
 
-        {error && (
-          <div className="edit-name__error">
-            {error}
-          </div>
-        )}
-
         <div className="edit-name__actions">
           <Button
             variant="outline"
@@ -71,6 +65,10 @@ export const EditNameModal: React.FC<EditNameModalProps> = ({
             {isSaving ? 'Saving...' : 'Save changes'}
           </Button>
         </div>
+
+        {error && (
+            <p className="edit-name__error">{error}</p>
+        )}
       </div>
     </Modal>
   );

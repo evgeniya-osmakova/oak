@@ -15,11 +15,11 @@ export const Sidebar = () => {
     };
 
     if (expandedSection) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('pointerdown', handleClickOutside);
     }
 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('pointerdown', handleClickOutside);
     };
   }, [expandedSection]);
 
@@ -37,15 +37,18 @@ export const Sidebar = () => {
       ref={sidebarRef}
     >
       <aside className="sidebar__main">
-        <div className="sidebar__icons">
+        <nav className="sidebar__icons">
           <div className="sidebar__logo">
             <Icon name="logo" size={36} className="sidebar__logo-icon" />
           </div>
 
-          <nav className="sidebar__nav">
+          <div className="sidebar__nav">
             <div
               className={`sidebar__nav-icon ${expandedSection === 'organizations' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('organizations')}
+              aria-label="Open organizations menu"
+              role="button"
+              tabIndex={0}
             >
               <Icon name="company" size={24} className="icon" />
             </div>
@@ -53,27 +56,36 @@ export const Sidebar = () => {
             <div
               className={`sidebar__nav-icon ${expandedSection === 'search' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('search')}
+              aria-label="Open search"
+              role="button"
+              tabIndex={0}
             >
               <Icon name="search" size={24} className="icon" />
             </div>
-          </nav>
+          </div>
 
           <div className="sidebar__bottom">
             <div
               className={`sidebar__nav-icon ${expandedSection === 'settings' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('settings')}
+              aria-label="Open settings"
+              role="button"
+              tabIndex={0}
             >
               <Icon name="settings" size={24} className="icon" />
             </div>
 
             <div
               className={`sidebar__nav-icon ${expandedSection === 'logout' ? 'sidebar__nav-icon_active' : ''}`}
-              onClick={() => toggleSection('logout')}
+              onClick={() => true}
+              aria-label="Log out"
+              role="button"
+              tabIndex={0}
             >
               <Icon name="exit" size={24} className="icon" />
             </div>
           </div>
-        </div>
+        </nav>
       </aside>
 
       {expandedSection && (
