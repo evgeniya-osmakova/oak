@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Icon } from '../common/Icon/Icon';
+import { Icon, iconName } from '../common/Icon/Icon'
 import './Sidebar.scss';
 import { Button } from '../common/Button/Button'
 
@@ -31,6 +31,24 @@ export const Sidebar = () => {
     }
   };
 
+  const renderIcon = (name: iconName) => {
+    return (
+      <div
+          className={`sidebar__nav-icon ${expandedSection === name ? 'sidebar__nav-icon_active' : ''}`}
+          onClick={() => toggleSection(name)}
+          aria-label={name}
+          role="button"
+          tabIndex={0}
+      >
+        <Icon
+            name={name}
+            size={20}
+            className="icon"
+        />
+      </div>
+    )
+  }
+
   return (
     <div
       className="sidebar__container"
@@ -42,48 +60,14 @@ export const Sidebar = () => {
             <Icon name="logo" size={36} className="sidebar__logo-icon" />
           </div>
 
-          <div className="sidebar__nav">
-            <div
-              className={`sidebar__nav-icon ${expandedSection === 'organizations' ? 'sidebar__nav-icon_active' : ''}`}
-              onClick={() => toggleSection('organizations')}
-              aria-label="Open organizations menu"
-              role="button"
-              tabIndex={0}
-            >
-              <Icon name="company" size={24} className="icon" />
-            </div>
-
-            <div
-              className={`sidebar__nav-icon ${expandedSection === 'search' ? 'sidebar__nav-icon_active' : ''}`}
-              onClick={() => toggleSection('search')}
-              aria-label="Open search"
-              role="button"
-              tabIndex={0}
-            >
-              <Icon name="search" size={24} className="icon" />
-            </div>
+          <div className="sidebar__top">
+            {renderIcon('organizations')}
+            {renderIcon('search')}
           </div>
 
           <div className="sidebar__bottom">
-            <div
-              className={`sidebar__nav-icon ${expandedSection === 'settings' ? 'sidebar__nav-icon_active' : ''}`}
-              onClick={() => toggleSection('settings')}
-              aria-label="Open settings"
-              role="button"
-              tabIndex={0}
-            >
-              <Icon name="settings" size={24} className="icon" />
-            </div>
-
-            <div
-              className={`sidebar__nav-icon ${expandedSection === 'logout' ? 'sidebar__nav-icon_active' : ''}`}
-              onClick={() => true}
-              aria-label="Log out"
-              role="button"
-              tabIndex={0}
-            >
-              <Icon name="exit" size={24} className="icon" />
-            </div>
+            {renderIcon('settings')}
+            {renderIcon('exit')}
           </div>
         </nav>
       </aside>
@@ -100,8 +84,8 @@ export const Sidebar = () => {
               <Button
                   variant="filled"
                   onClick={() => setExpandedSection(null)}
-                  iconName="company"
-                  iconSize={24}
+                  iconName="organizations"
+                  iconSize={16}
                   largeButton
               >
                 Organizations
@@ -111,7 +95,7 @@ export const Sidebar = () => {
                   variant="outline"
                   onClick={() => setExpandedSection(null)}
                   iconName="contractor"
-                  iconSize={24}
+                  iconSize={16}
                   largeButton
               >
                 Contractors
@@ -121,7 +105,7 @@ export const Sidebar = () => {
                   variant="outline"
                   onClick={() => setExpandedSection(null)}
                   iconName="account"
-                  iconSize={24}
+                  iconSize={16}
                   largeButton
               >
                 Clients

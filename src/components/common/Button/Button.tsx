@@ -8,15 +8,16 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   iconButton?: boolean;
   largeButton?: boolean;
-  children: React.ReactNode;
+  smallButton?: boolean;
   iconName?: iconName;
   iconSize?: number;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<React.PropsWithChildren<ButtonProps>> = ({
   variant = 'filled',
   iconButton = false,
   largeButton = false,
+  smallButton = false,
   children,
   className,
   iconName,
@@ -29,8 +30,9 @@ export const Button: React.FC<ButtonProps> = ({
         button 
         button_${variant}
         ${iconButton ? 'button_icon-button' : ''}
-        ${iconName ? 'button_with-icon' : ''}
+        ${iconName && !smallButton ? 'button_with-icon' : ''}
         ${largeButton ? 'button_large' : ''}
+        ${smallButton ? 'button_small' : ''}
         ${className || ''}
       `.trim()}
       {...props}
@@ -43,11 +45,11 @@ export const Button: React.FC<ButtonProps> = ({
         />
       )}
 
-      <span
-          className="button__text"
-      >
+      {children && (
+        <span className="button__text">
           {children}
-      </span>
+        </span>
+      )}
     </button>
   );
 };

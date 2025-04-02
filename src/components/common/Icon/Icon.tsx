@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as LogoIcon } from '../../../icons/logo.svg';
-import { ReactComponent as CompanyIcon } from '../../../icons/company.svg';
+import { ReactComponent as CompanyIcon } from '../../../icons/organizations.svg';
 import { ReactComponent as SearchIcon } from '../../../icons/search.svg';
 import { ReactComponent as SettingsIcon } from '../../../icons/settings.svg';
 import { ReactComponent as ExitIcon } from '../../../icons/exit.svg';
@@ -14,7 +14,7 @@ import { ReactComponent as CheckIcon } from '../../../icons/check.svg';
 import { ReactComponent as CloseIcon } from '../../../icons/close.svg';
 
 
-export type iconName = 'logo' | 'company' | 'search' | 'settings' | 'exit' | 'contractor' | 'account' | 'arrow-left' | 'edit' | 'delete' | 'photo' | 'check' | 'close';
+export type iconName = 'logo' | 'organizations' | 'search' | 'settings' | 'exit' | 'contractor' | 'account' | 'arrow-left' | 'edit' | 'delete' | 'photo' | 'check' | 'close';
 
 interface IconProps {
   name: iconName;
@@ -24,7 +24,7 @@ interface IconProps {
 
 const icons = {
   logo: LogoIcon,
-  company: CompanyIcon,
+  organizations: CompanyIcon,
   search: SearchIcon,
   settings: SettingsIcon,
   exit: ExitIcon,

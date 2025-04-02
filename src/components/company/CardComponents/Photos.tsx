@@ -3,6 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
 import { Icon } from '../../common/Icon/Icon';
 import { companyStore } from '../../../stores/CompanyStore';
+import { Button } from '../../common/Button/Button'
+
 import './Photos.scss';
 
 export const Photos = observer(() => {
@@ -62,12 +64,14 @@ export const Photos = observer(() => {
                             alt={photo.name}
                         />
 
-                        <button
-                            className="photos__delete-button"
+                        <Button
+                            className="photos__delete-button "
+                            variant="filled"
                             onClick={() => handleDeleteClick(photo.name)}
-                        >
-                            <Icon name="delete" />
-                        </button>
+                            iconName="delete"
+                            iconSize={16}
+                            smallButton
+                        />
                     </div>
                 ))}
             </div>

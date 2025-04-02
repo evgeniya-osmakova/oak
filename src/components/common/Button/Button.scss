@@ -42,6 +42,18 @@
     width: 210px;
   }
 
+  &_small {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+
+    .button__icon {
+      path {
+        stroke: rgba(255, 255, 255, 1);
+      }
+    }
+  }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.7;
@@ -60,8 +72,6 @@
     }
 
     .button__icon {
-      width: 20px;
-      height: 20px;
       color: rgba(0, 0, 0, 0.8);
     }
   }
@@ -79,8 +89,6 @@
     }
 
     .button__icon {
-      width: 20px;
-      height: 20px;
       color: rgba(0, 0, 0, 0.8);
     }
   }
