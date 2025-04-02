@@ -139,65 +139,6 @@
     flex: 1;
   }
 
-  &__nav-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    height: 40px;
-    width: 100%;
-    padding: 0 20px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    color: rgba(0, 0, 0, 0.8);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-    position: relative;
-    border: 1px solid transparent;
-
-    &_filled {
-      color: rgba(255, 255, 255, 0.95);
-      background-color: rgba(59, 59, 59, 1);
-
-      &:hover {
-        background-color: rgba(59, 59, 59, 0.9);
-      }
-
-      &:active {
-        background-color: rgba(59, 59, 59, 0.8);
-      }
-    }
-
-    &_outlined {
-      border: 1px solid rgba(0, 0, 0, 0.2);
-
-      &:hover {
-        color: rgba(109, 74, 255, 1);
-        border-color: rgba(0, 0, 0, 0.4);
-      }
-
-      &:active {
-        border-color: rgba(98, 67, 230, 1);
-      }
-    }
-
-    .icon {
-      width: 20px;
-      height: 20px;
-      color: rgba(0, 0, 0, 0.8);
-    }
-
-    span {
-      font-family: 'Poppins', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      line-height: 24px;
-      letter-spacing: 0.3px;
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-  }
-
   &__copyright {
     padding: 20px;
     color: rgba(0, 0, 0, 0.3);

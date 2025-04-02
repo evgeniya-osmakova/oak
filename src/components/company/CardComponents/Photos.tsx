@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
-import { Icon } from '../../Icon/Icon';
+import { Icon } from '../../common/Icon/Icon';
 import { companyStore } from '../../../stores/CompanyStore';
 import './Photos.scss';
 
@@ -49,11 +49,11 @@ export const Photos = observer(() => {
                 accept="image/*"
                 style={{ display: 'none' }}
             />
-            
+
             <div className="photos__grid">
                 {companyStore.allPhotos.map((photo) => (
-                    <div 
-                        className="photos__item" 
+                    <div
+                        className="photos__item"
                         key={photo.filepath}
                     >
                         <img
@@ -61,8 +61,8 @@ export const Photos = observer(() => {
                             src={photo.filepath}
                             alt={photo.name}
                         />
-                        
-                        <button 
+
+                        <button
                             className="photos__delete-button"
                             onClick={() => handleDeleteClick(photo.name)}
                         >

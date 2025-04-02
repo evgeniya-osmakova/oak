@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Icon } from '../Icon/Icon';
+import { Icon } from '../common/Icon/Icon';
 import './Sidebar.scss';
+import { Button } from '../common/Button/Button'
 
 export const Sidebar = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
@@ -84,29 +85,35 @@ export const Sidebar = () => {
 
           {expandedSection === 'organizations' && (
             <nav className="sidebar__content">
-              <div
-                className="sidebar__nav-item sidebar__nav-item_filled"
-                onClick={() => setExpandedSection(null)}
+              <Button
+                  variant="filled"
+                  onClick={() => setExpandedSection(null)}
+                  iconName="company"
+                  iconSize={24}
+                  largeButton
               >
-                <Icon name="company" size={24} className="icon" />
-                <span>Organizations</span>
-              </div>
+                Organizations
+              </Button>
 
-              <div
-                className="sidebar__nav-item sidebar__nav-item_outlined"
-                onClick={() => setExpandedSection(null)}
+              <Button
+                  variant="outline"
+                  onClick={() => setExpandedSection(null)}
+                  iconName="contractor"
+                  iconSize={24}
+                  largeButton
               >
-                <Icon name="contractor" size={24} className="icon" />
-                <span>Contractors</span>
-              </div>
+                Contractors
+              </Button>
 
-              <div
-                className="sidebar__nav-item sidebar__nav-item_outlined"
-                onClick={() => setExpandedSection(null)}
+              <Button
+                  variant="outline"
+                  onClick={() => setExpandedSection(null)}
+                  iconName="account"
+                  iconSize={24}
+                  largeButton
               >
-                <Icon name="account" size={24} className="icon" />
-                <span>Clients</span>
-              </div>
+                Clients
+              </Button>
             </nav>
           )}
 

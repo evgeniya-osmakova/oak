@@ -1,4 +1,4 @@
-import { makeObservable, observable, computed, action } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import type { Company, CompanyUpdateData, Contact, ContactUpdateData, Photo } from '../api/types';
 import { api } from '../api/api';
 
@@ -10,21 +10,7 @@ class CompanyStore {
   uploadedPhotos: Photo[] = [];
 
   constructor() {
-    makeObservable(this, {
-      company: observable,
-      contact: observable,
-      loading: observable,
-      error: observable,
-      uploadedPhotos: observable,
-      hasError: computed,
-      fetchCompanyData: action,
-      updateCompany: action,
-      updateContact: action,
-      uploadImage: action,
-      deleteImage: action,
-      deleteCompany: action,
-      addUploadedPhoto: action
-    });
+    makeAutoObservable(this);
   }
 
   get hasError(): boolean {
@@ -40,21 +26,22 @@ class CompanyStore {
   };
 
   async fetchCompanyData(companyId: string, contactId: string): Promise<void> {
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       const [company, contact] = await Promise.all([
         api.getCompany(companyId),
         api.getContact(contactId),
       ]);
-      this.company = company;
+      this.setCompany(company);
       this.contact = contact;
       this.uploadedPhotos = [];
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to fetch company data');
+      console.error('Error fetching company data:', error);
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
   }
 
@@ -63,16 +50,18 @@ class CompanyStore {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       const updatedCompany = await api.updateCompany(this.company.id, data);
-      this.company = updatedCompany;
+      this.setCompany(updatedCompany);
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to update company');
+      console.error('Error updating company:', error);
+      throw error;
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
   }
 
@@ -81,16 +70,18 @@ class CompanyStore {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       const updatedContact = await api.updateContact(this.contact.id, data);
       this.contact = updatedContact;
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to update contact');
+      console.error('Error updating contact:', error);
+      throw error;
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
   }
 
@@ -99,16 +90,18 @@ class CompanyStore {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       const photo = await api.uploadCompanyImage(this.company.id, file);
       this.addUploadedPhoto(photo);
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to upload image');
+      console.error('Error uploading image:', error);
+      throw error;
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
   }
 
@@ -117,8 +110,8 @@ class CompanyStore {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       await api.deleteCompanyImage(this.company.id, imageName);
@@ -127,9 +120,11 @@ class CompanyStore {
       }
       this.uploadedPhotos = this.uploadedPhotos.filter(photo => photo.name !== imageName);
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to delete image');
+      console.error('Error deleting image:', error);
+      throw error;
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
   }
 
@@ -138,18 +133,32 @@ class CompanyStore {
       return;
     }
 
-    this.loading = true;
-    this.error = null;
+    this.setLoading(true);
+    this.setError(null);
 
     try {
       await api.deleteCompany(this.company.id);
-      this.company = null;
+      this.setCompany(null);
       this.uploadedPhotos = [];
     } catch (error) {
-      this.error = error instanceof Error ? error.message : 'An error occurred';
+      this.setError('Failed to delete company');
+      console.error('Error deleting company:', error);
+      throw error;
     } finally {
-      this.loading = false;
+      this.setLoading(false);
     }
+  }
+
+  setLoading(loading: boolean) {
+    this.loading = loading;
+  }
+
+  setError(error: string | null) {
+    this.error = error;
+  }
+
+  setCompany(company: Company | null) {
+    this.company = company;
   }
 }
 

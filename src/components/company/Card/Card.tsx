@@ -1,5 +1,7 @@
 import React from 'react';
-import { Icon, iconName } from '../../Icon/Icon';
+import { iconName } from '../../common/Icon/Icon';
+import { Button } from '../../common/Button/Button'
+
 import './Card.scss';
 
 interface CardProps {
@@ -46,53 +48,36 @@ export const Card: React.FC<CardProps> = ({
           {title}
         </h2>
 
-        <div className="card__actions">
-          {isEditing ? (
-            <>
-              <button
-                className="card__edit-button"
+        {isEditing ? (
+          <div className="card__actions">
+            <Button
+                variant="flattened"
                 onClick={handleSave}
-              >
-                <Icon
-                  name="check"
-                  className="card__edit-button-icon"
-                />
-
-                <span className="card__edit-button-text">
-                  Save
-                </span>
-              </button>
-
-              <button
-                className="card__edit-button"
-                onClick={handleCancel}
-              >
-                <Icon
-                  name="close"
-                  className="card__edit-button-icon"
-                />
-
-                <span className="card__edit-button-text">
-                  Cancel
-                </span>
-              </button>
-            </>
-          ) : (
-            <button
-              className="card__edit-button"
-              onClick={handleEdit}
+                iconName="check"
+                iconSize={16}
             >
-              <Icon
-                name={icon}
-                className="card__edit-button-icon"
-              />
+              Save changes
+            </Button>
 
-              <span className="card__edit-button-text">
-                {iconTitle}
-              </span>
-            </button>
-          )}
-        </div>
+            <Button
+                variant="flattened"
+                onClick={handleCancel}
+                iconName="close"
+                iconSize={16}
+            >
+              Cancel
+            </Button>
+          </div>
+        ) : (
+            <Button
+                variant="flattened"
+                onClick={handleEdit}
+                iconName={icon}
+                iconSize={16}
+            >
+              {iconTitle}
+            </Button>
+        )}
       </div>
 
       <div className={`card__grid ${isEditing ? 'card__grid_editing' : ''}`}>
