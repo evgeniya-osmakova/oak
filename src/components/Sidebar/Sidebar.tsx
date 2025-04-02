@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Icon, iconName } from '../common/Icon/Icon'
-import './Sidebar.sass';
 import { Button } from '../common/Button/Button'
+
+import './Sidebar.sass';
 
 export const Sidebar = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);

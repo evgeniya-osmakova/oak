@@ -1,46 +1,108 @@
-# Getting Started with Create React App
+# Oak Tree Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Технологии
 
-## Available Scripts
+- **React** 
+- **TypeScript** 
+- **MobX**
+- **SASS**
+- **BEM**
 
-In the project directory, you can run:
+## Особенности
 
-### `npm start`
+### Архитектура и Стили
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Использована методология БЭМ для организации CSS классов, что обеспечивает:
+  - Модульность компонентов
+  - Переиспользуемость стилей
+  - Легкость поддержки и масштабирования
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Все цветовые константы вынесены в отдельный файл `variables.sass`:
+  - Перенесены из Figma для точного соответствия дизайну
+  - Сгруппированы по категориям (brand colors, monochrome, UI colors)
+  - Обеспечивают единообразие цветовой схемы во всем приложении
 
-### `npm test`
+### UI компоненты
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Создан набор переиспользуемых UI компонентов:
 
-### `npm run build`
+- **Button**
+  - Варианты: filled, outline, flattened
+  - Поддержка иконок
+  - Состояния: hover, active, disabled
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **IconButton**
+  - Круглая кнопка для иконок
+  - Состояния: hover, active, disabled
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Input**
+  - Состояния: focus, hover, disabled
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Modal**
+  - Плавная анимация появления/исчезновения
+  - Кастомизируемый заголовок и контент
+  - Закрытие по клику вне модального окна (оверлей)
+  - Закрытие по нажатию клавиши Esc
 
-### `npm run eject`
+- **Select**
+  - Кастомизируемый выпадающий список
+  - Поддержка одиночного и множественного выбора
+  - Закрытие при клике вне компонента
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Sidebar**
+  - Расширяемая боковая панель
+  - Закрытие расширенного меню при клике вне области
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Обработка состояний
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Реализована обработка всех состояний UI компонентов согласно дизайну в Figma
+- Добавлены индикаторы загрузки для асинхронных операций
+- Реализована обработка и отображение ошибок
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Запуск проекта
 
-## Learn More
+```bash
+# Установка зависимостей
+npm install
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Запуск в режиме разработки
+npm run dev
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Сборка для продакшена
+npm run build
+```
+
+## Структура проекта
+
+```
+src/
+  api/                # API
+  constants/          # константы
+  icons/              # иконки
+  components/         # UI компоненты
+    common/          # Переиспользуемые компоненты
+    company/         # Компоненты для работы с компаниями
+  stores/            # MobX сторы
+  styles/            # Глобальные стили и переменные
+```
+
+## Будущие улучшения
+
+### Конфигурация и типизация
+
+- Настройка ESLint
+- Улучшение TypeScript конфигурации
+
+### Валидация
+
+- Добавление валидации для проверки данных в инпутах
+
+### Тестирование
+
+- Добавление unit-тестов
+- Добавление E2E тестов:
+
+### Улучшение UX
+
+- Добавление skeleton loader
+- Поддержка тёмной темы

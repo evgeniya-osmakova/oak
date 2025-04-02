@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useId } from 'react'
 import { Icon } from '../Icon/Icon';
+
 import './Select.sass';
 
 interface SelectOption {

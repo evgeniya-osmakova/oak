@@ -3,7 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { CompanyInfo } from './components/company/CompanyInfo';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { authStore } from './stores/AuthStore';
-import './styles/global.scss';
+
+import './styles/global.sass';
 import './App.sass';
 
 const App = observer(() => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, iconName } from '../Icon/Icon';
+
 import './Button.sass';
 
 export type ButtonVariant = 'filled' | 'outline' | 'flattened';
