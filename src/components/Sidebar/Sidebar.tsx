@@ -14,39 +14,39 @@ export const Sidebar = () => {
   };
 
   return (
-    <div className="sidebar-container">
-      <aside className="sidebar">
-        <div className="sidebar-icons">
-          <div className="logo">
-            <Icon name="logo" size={36} className="logo-icon" />
+    <div className="sidebar__container">
+      <aside className="sidebar__main">
+        <div className="sidebar__icons">
+          <div className="sidebar__logo">
+            <Icon name="logo" size={36} className="sidebar__logo-icon" />
           </div>
 
-          <nav className="nav-icons">
+          <nav className="sidebar__nav">
             <div
-              className={`nav-icon ${expandedSection === 'organizations' ? 'active' : ''}`}
+              className={`sidebar__nav-icon ${expandedSection === 'organizations' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('organizations')}
             >
               <Icon name="company" size={24} className="icon" />
             </div>
 
             <div
-              className={`nav-icon ${expandedSection === 'search' ? 'active' : ''}`}
+              className={`sidebar__nav-icon ${expandedSection === 'search' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('search')}
             >
               <Icon name="search" size={24} className="icon" />
             </div>
           </nav>
 
-          <div className="bottom-icons">
+          <div className="sidebar__bottom">
             <div
-              className={`nav-icon ${expandedSection === 'settings' ? 'active' : ''}`}
+              className={`sidebar__nav-icon ${expandedSection === 'settings' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('settings')}
             >
               <Icon name="settings" size={24} className="icon" />
             </div>
 
             <div
-              className={`nav-icon ${expandedSection === 'logout' ? 'active' : ''}`}
+              className={`sidebar__nav-icon ${expandedSection === 'logout' ? 'sidebar__nav-icon_active' : ''}`}
               onClick={() => toggleSection('logout')}
             >
               <Icon name="exit" size={24} className="icon" />
@@ -56,32 +56,32 @@ export const Sidebar = () => {
       </aside>
 
       {expandedSection && (
-        <div className="sidebar-expanded">
-          <div className="expanded-header">
-            <h1>Oak Tree Cemetery</h1>
-            <h2>Process Manager</h2>
+        <div className="sidebar__expanded">
+          <div className="sidebar__header">
+            <h2 className="sidebar__title">Oak Tree Cemetery</h2>
+            <h3 className="sidebar__subtitle">Process Manager</h3>
           </div>
 
           {expandedSection === 'organizations' && (
-            <nav className="expanded-content">
-              <div 
-                className="nav-item nav-item__filled"
+            <nav className="sidebar__content">
+              <div
+                className="sidebar__nav-item sidebar__nav-item_filled"
                 onClick={() => setExpandedSection(null)}
               >
                 <Icon name="company" size={24} className="icon" />
                 <span>Organizations</span>
               </div>
 
-              <div 
-                className="nav-item nav-item__outlined"
+              <div
+                className="sidebar__nav-item sidebar__nav-item_outlined"
                 onClick={() => setExpandedSection(null)}
               >
                 <Icon name="contractor" size={24} className="icon" />
                 <span>Contractors</span>
               </div>
 
-              <div 
-                className="nav-item nav-item__outlined"
+              <div
+                className="sidebar__nav-item sidebar__nav-item_outlined"
                 onClick={() => setExpandedSection(null)}
               >
                 <Icon name="account" size={24} className="icon" />
@@ -90,7 +90,7 @@ export const Sidebar = () => {
             </nav>
           )}
 
-          <div className="copyright">
+          <div className="sidebar__copyright">
             All Funeral Services © 2015-2025
           </div>
         </div>

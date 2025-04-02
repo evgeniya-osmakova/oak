@@ -15,27 +15,27 @@ export const CompanyInfo = observer(() => {
   }, []);
 
   if (companyStore.loading && (!companyStore.company || !companyStore.contact)) {
-    return <div className="loading">Loading...</div>;
+    return <div className="company__loading">Loading...</div>;
   }
 
   if (companyStore.error || !companyStore.company || !companyStore.contact) {
-    return <div className="error">{companyStore.error || 'Data not found'}</div>;
+    return <div className="company__error">{companyStore.error || 'Data not found'}</div>;
   }
 
   return (
-    <div className="company-info">
-      <header className="company-header">
-        <button className="back-button">
+    <div className="company__info">
+      <header className="company__header">
+        <button className="company__back-button">
           <Icon name="arrow-left" size={20} />
         </button>
 
-        <h1>{companyStore.company.name}</h1>
+        <h1 className="company__title">{companyStore.company.name}</h1>
 
-        <div className="header-actions">
-          <button className="action-button">
+        <div className="company__actions">
+          <button className="company__action-button">
             <Icon name="edit" size={20} />
           </button>
-          <button className="action-button">
+          <button className="company__action-button">
             <Icon name="delete" size={20} />
           </button>
         </div>
