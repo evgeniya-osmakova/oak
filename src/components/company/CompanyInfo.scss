@@ -10,6 +10,7 @@
     margin-bottom: 32px;
     gap: 32px;
     height: 40px;
+    width: 710px;
   }
 
   &__title {
@@ -23,67 +24,10 @@
     margin: 0;
   }
 
-  &__back-button {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.8);
-    transition: background 0.2s ease;
-    flex-shrink: 0;
-
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    &:active {
-      background: rgba(153, 129, 255, 1);
-      color: white;
-    }
-  }
-
   &__actions {
     display: flex;
     height: 40px;
     flex-shrink: 0;
-  }
-
-  &__action-button {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(0, 0, 0, 0.8);
-    transition: background 0.2s ease;
-
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-
-    &:hover {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    &:active {
-      background: rgba(153, 129, 255, 1);
-      color: white;
-    }
   }
 
   &__loading {

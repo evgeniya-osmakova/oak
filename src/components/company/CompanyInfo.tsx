@@ -7,6 +7,7 @@ import { Details } from './CardComponents/Details'
 import { Contacts } from './CardComponents/Contacts'
 import { Photos } from './CardComponents/Photos'
 import { EditNameModal } from './EditNameModal/EditNameModal'
+import { IconButton } from '../../components/common/IconButton/IconButton';
 
 import './CompanyInfo.scss';
 
@@ -50,25 +51,29 @@ export const CompanyInfo = observer(() => {
 
   return (
     <div className="company__info">
-      <header className="company__header">
-        <button className="company__back-button">
-          <Icon name="arrow-left" size={20} />
-        </button>
+      <div className="company__header">
+        <IconButton
+          iconName="arrow-left"
+          iconSize={20}
+          onClick={() => true}
+        />
 
         <h1 className="company__title">{companyStore.company.name}</h1>
 
         <div className="company__actions">
-          <button
-            className="company__action-button"
-            onClick={() => setIsEditModalOpen(true)}
-          >
-            <Icon name="edit" size={20} />
-          </button>
-          <button className="company__action-button">
-            <Icon name="delete" size={20} />
-          </button>
+          <IconButton
+              iconName="edit"
+              iconSize={20}
+              onClick={() => setIsEditModalOpen(true)}
+          />
+
+          <IconButton
+              iconName="delete"
+              iconSize={20}
+              onClick={() => true}
+          />
         </div>
-      </header>
+      </div>
 
       <Details />
       <Contacts />
