@@ -1,8 +1,18 @@
-.select-container {
+.select {
   position: relative;
   width: 100%;
 
-  .select-value {
+  &__label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgba(0, 0, 0, 0.5);
+    width: 160px;
+    flex-shrink: 0;
+    margin-right: 12px;
+  }
+
+  &__value {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -13,12 +23,12 @@
     cursor: pointer;
     min-height: 40px;
 
-    span {
+    &-text {
       color: #333;
       font-size: 14px;
     }
 
-    svg {
+    &-icon {
       transform: rotate(-90deg);
       transition: transform 0.2s;
       width: 10px;
@@ -26,17 +36,17 @@
     }
   }
 
-  &.open {
-    .select-value {
+  &_open {
+    .select__value {
       border-color: #7C53F5;
 
-      svg {
+      &-icon {
         transform: rotate(90deg);
       }
     }
   }
 
-  .select-options {
+  &__options {
     position: absolute;
     top: 100%;
     left: 0;
@@ -52,7 +62,7 @@
     padding: 8px 0;
   }
 
-  .select-option {
+  &__option {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -61,29 +71,29 @@
     font-size: 14px;
     color: #333;
 
-    .checkbox {
-      width: 16px;
-      height: 16px;
-      border: 1px solid #E0E0E0;
-      border-radius: 2px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-
-      svg {
-        width: 10px;
-        height: 10px;
-        color: white;
-      }
-    }
-
     &:hover {
       background: #F5F5F5;
     }
 
-    &.selected {
+    &_selected {
       background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &__checkbox {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #E0E0E0;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+
+    &-icon {
+      width: 10px;
+      height: 10px;
+      color: white;
     }
   }
 }

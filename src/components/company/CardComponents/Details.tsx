@@ -5,7 +5,7 @@ import { Input } from '../../common/Input/Input';
 import { Select } from '../../common/Select/Select';
 import { companyStore } from '../../../stores/CompanyStore';
 
-import './CardComponents.scss';
+import './EditableContent.scss';
 
 const BUSINESS_ENTITY_OPTIONS = [
   { value: 'Sole Proprietorship', label: 'Sole Proprietorship' },
@@ -66,7 +66,7 @@ export const Details = observer(() => {
     if (company) {
       // Parse the date from DD.MM.YYYY to ISO format
       const [day, month, year] = editedData.contract.issue_date.split('.');
-      const isoDate = `${year}-${month}-${day}T00:00:00Z`;
+      const isoDate = day && month && year ? `${year}-${month}-${day}T00:00:00Z` : '';
 
       companyStore.updateCompany({
         name: editedData.name,
@@ -110,7 +110,9 @@ export const Details = observer(() => {
     }
   };
 
-  if (!company) return null;
+  if (!company) {
+    return null;
+  }
 
   return (
     <Card
@@ -122,80 +124,104 @@ export const Details = observer(() => {
       onSave={handleSave}
       onCancel={handleCancel}
     >
-      <div className="details-grid">
-        <div className="detail-item">
-          {isEditing ? (
-            <div className="input-row">
-              <div className="input-block">
-                <span className="label">Agreement number:</span>
-
-                <Input
-                    small
-                    value={editedData.contract.no}
-                    onValueChange={(value) => setEditedData(prev => ({
-                      ...prev,
-                      contract: {
-                        ...prev.contract,
-                        no: value
-                      }
-                    }))}
-                />
-              </div>
-
-              <div className="input-block">
-                <span className="label label__small">Date:</span>
-                <Input
-                  small
-                  value={editedData.contract.issue_date}
-                  onValueChange={(value) => setEditedData(prev => ({
-                    ...prev,
-                    contract: {
-                      ...prev.contract,
-                      issue_date: value
-                    }
-                  }))}
-                />
-              </div>
+      <div className="content__item">
+        {isEditing ? (
+          <div className="content__input-row">
+            <div className="content__input-block">
+              <Input
+                label="Agreement number:"
+                smallInput
+                value={editedData.contract.no}
+                onValueChange={(value) => setEditedData(prev => ({
+                  ...prev,
+                  contract: {
+                    ...prev.contract,
+                    no: value
+                  }
+                }))}
+              />
             </div>
-          ) : (
+
+            <div className="content__input-block">
+              <Input
+                label="Date:"
+                smallInput
+                smallLabel
+                value={editedData.contract.issue_date}
+                onValueChange={(value) => setEditedData(prev => ({
+                  ...prev,
+                  contract: {
+                    ...prev.contract,
+                    issue_date: value
+                  }
+                }))}
+              />
+            </div>
+          </div>
+        ) : (
+          <>
+            <span className="content__label">
+              Agreement:
+            </span>
+
+            <div className="content__value">
+              <span>
+                {company.contract?.no || 'N/A'}
+              </span>
+
+              <span className="content__value-divider">
+                /
+              </span>
+
+              <span>
+                {formatDisplayDate(company.contract?.issue_date)}
+              </span>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="content__item">
+        {isEditing ? (
+          <Select
+            label="Business entity:"
+            value={editedData.businessEntity}
+            options={BUSINESS_ENTITY_OPTIONS}
+            onChange={handleBusinessEntityChange}
+          />
+        ) : (
+          <>
+            <span className="content__label">
+              Business entity:
+            </span>
+
+            <span className="content__value">
+              {company.businessEntity}
+            </span>
+          </>
+        )}
+      </div>
+
+      <div className="content__item">
+        {isEditing ? (
+          <Select
+            label="Company type:"
+            value={editedData.type}
+            options={COMPANY_TYPE_OPTIONS}
+            onChange={handleTypeChange}
+            multiple
+          />
+        ) : (
             <>
-              <span className="label">Agreement:</span>
+              <span className="content__label">
+                Company type:
+              </span>
 
-              <div className="value">
-                <span>{company.contract?.no || 'N/A'}</span>
-                <span className="divider">/</span>
-                <span>{formatDisplayDate(company.contract?.issue_date)}</span>
-              </div>
+              <span className="content__value">
+                {company.type.join(', ')}
+              </span>
             </>
-          )}
-        </div>
-
-        <div className="detail-item">
-          <span className="label">Business entity:</span>
-          {isEditing ? (
-            <Select
-              value={editedData.businessEntity}
-              options={BUSINESS_ENTITY_OPTIONS}
-              onChange={handleBusinessEntityChange}
-            />
-          ) : (
-            <span className="value">{company.businessEntity}</span>
-          )}
-        </div>
-
-        <div className="detail-item">
-          <span className="label">Company type:</span>
-          {isEditing ? (
-            <Select
-              value={editedData.type}
-              options={COMPANY_TYPE_OPTIONS}
-              onChange={handleTypeChange}
-              multiple
-            />
-          ) : (
-            <span className="value">{company.type.join(', ')}</span>
-          )}
-        </div>
+        )}
       </div>
     </Card>
   );

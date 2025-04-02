@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
 import { Input } from '../../common/Input/Input';
 import { companyStore } from '../../../stores/CompanyStore';
-import './CardComponents.scss';
+import './EditableContent.scss';
 
 interface EditedData {
   firstname: string;
@@ -56,7 +56,9 @@ export const Contacts = observer(() => {
     }));
   };
 
-  if (!contact) return null;
+  if (!contact) {
+    return null
+  }
 
   return (
     <Card
@@ -68,52 +70,78 @@ export const Contacts = observer(() => {
       onSave={handleSave}
       onCancel={handleCancel}
     >
-      <div className="details-grid">
-        <div className="detail-item">
-          <span className="label">Responsible person:</span>
-
-          {isEditing ? (
-            <div className="input-row">
-              <Input
-                value={editedData.firstname}
-                onValueChange={handleChange('firstname')}
-                placeholder="First name"
-              />
-              <Input
-                value={editedData.lastname}
-                onValueChange={handleChange('lastname')}
-                placeholder="Last name"
-              />
-            </div>
-          ) : (
-            <span className="value">{contact.firstname} {contact.lastname}</span>
-          )}
-        </div>
-
-        <div className="detail-item">
-          <span className="label">Phone number:</span>
-          {isEditing ? (
+      <div className="content__item">
+        {isEditing ? (
+          <div className="content__input-row">
             <Input
-              value={editedData.phone}
-              onValueChange={handleChange('phone')}
+              label="Responsible person:"
+              value={editedData.firstname}
+              onValueChange={handleChange('firstname')}
+              placeholder="First name"
             />
-          ) : (
-            <span className="value">{contact.phone}</span>
-          )}
-        </div>
 
-        <div className="detail-item">
-          <span className="label">E-mail:</span>
-
-          {isEditing ? (
             <Input
-              value={editedData.email}
-              onValueChange={handleChange('email')}
+              label=""
+              value={editedData.lastname}
+              onValueChange={handleChange('lastname')}
+              placeholder="Last name"
             />
-          ) : (
-            <span className="value">{contact.email}</span>
-          )}
-        </div>
+          </div>
+        ) : (
+          <>
+            <span className="content__label">
+              Responsible person:
+            </span>
+
+            <span className="content__value">
+              {contact.firstname} {contact.lastname}
+            </span>
+          </>
+        )}
+      </div>
+
+      <div className="content__item">
+        {isEditing ? (
+          <Input
+            label="Phone number:"
+            type="tel"
+            autoComplete="tel"
+            value={editedData.phone}
+            onValueChange={handleChange('phone')}
+          />
+        ) : (
+          <>
+            <span className="content__label">
+              Phone number:
+            </span>
+
+            <span className="content__value">
+              {contact.phone}
+            </span>
+          </>
+        )}
+      </div>
+
+      <div className="content__item">
+        {isEditing ? (
+          <Input
+            label="E-mail:"
+            type="email"
+            autoComplete="email"
+            value={editedData.email}
+            onValueChange={handleChange('email')}
+          />
+        ) : (
+          <>
+            <span className="content__label">
+              E-mail:
+            </span>
+
+            <span className="content__value">
+              {contact.email}
+            </span>
+          </>
+        )}
       </div>
     </Card>
   );

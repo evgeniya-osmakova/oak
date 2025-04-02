@@ -3,8 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
 import { Icon } from '../../Icon/Icon';
 import { companyStore } from '../../../stores/CompanyStore';
-
-import './CardComponents.scss';
+import './Photos.scss';
 
 export const Photos = observer(() => {
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -51,19 +50,23 @@ export const Photos = observer(() => {
                 style={{ display: 'none' }}
             />
             
-            <div className="photos-grid">
+            <div className="photos__grid">
                 {companyStore.allPhotos.map((photo) => (
-                    <div className="photo-container" key={photo.filepath}>
+                    <div 
+                        className="photos__item" 
+                        key={photo.filepath}
+                    >
                         <img
-                            className="photo"
+                            className="photos__image"
                             src={photo.filepath}
                             alt={photo.name}
                         />
+                        
                         <button 
-                            className="delete-button"
+                            className="photos__delete-button"
                             onClick={() => handleDeleteClick(photo.name)}
                         >
-                            <Icon name="delete" size={24} />
+                            <Icon name="delete" />
                         </button>
                     </div>
                 ))}

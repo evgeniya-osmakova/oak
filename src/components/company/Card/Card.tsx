@@ -4,10 +4,10 @@ import './Card.scss';
 
 interface CardProps {
   title: string;
-  icon?: iconName;
-  iconTitle?: string;
-  onClick?: () => void;
+  icon: iconName;
+  iconTitle: string;
   children: React.ReactNode;
+  onClick: () => void;
   isEditing?: boolean;
   onSave?: () => void;
   onCancel?: () => void;
@@ -23,34 +23,81 @@ export const Card: React.FC<CardProps> = ({
   onSave,
   onCancel
 }) => {
+  const handleEdit = () => {
+    onClick();
+  };
+
+  const handleSave = () => {
+    if (onSave) {
+      onSave();
+    }
+  };
+
+  const handleCancel = () => {
+    if (onCancel) {
+      onCancel();
+    }
+  };
+
   return (
-    <div className="company-content">
-      <div className="content-header">
-        <h2>{title}</h2>
+    <div className="card">
+      <div className="card__header">
+        <h2 className="card__title">
+          {title}
+        </h2>
 
-        {!isEditing && icon && (
-          <button className="edit-button" onClick={onClick}>
-            <Icon name={icon} />
-            {iconTitle && <span>{iconTitle}</span>}
-          </button>
-        )}
+        <div className="card__actions">
+          {isEditing ? (
+            <>
+              <button
+                className="card__edit-button"
+                onClick={handleSave}
+              >
+                <Icon
+                  name="check"
+                  className="card__edit-button-icon"
+                />
 
-        {isEditing && (
-          <div className="action-buttons">
-            <button className="edit-button" onClick={onSave}>
-              <Icon name="check" />
-              <span>Save changes</span>
+                <span className="card__edit-button-text">
+                  Save
+                </span>
+              </button>
+
+              <button
+                className="card__edit-button"
+                onClick={handleCancel}
+              >
+                <Icon
+                  name="close"
+                  className="card__edit-button-icon"
+                />
+
+                <span className="card__edit-button-text">
+                  Cancel
+                </span>
+              </button>
+            </>
+          ) : (
+            <button
+              className="card__edit-button"
+              onClick={handleEdit}
+            >
+              <Icon
+                name={icon}
+                className="card__edit-button-icon"
+              />
+
+              <span className="card__edit-button-text">
+                {iconTitle}
+              </span>
             </button>
-
-            <button className="edit-button" onClick={onCancel}>
-              <Icon name="close" />
-              <span>Cancel</span>
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
-      {children}
+      <div className={`card__grid ${isEditing ? 'card__grid_editing' : ''}`}>
+        {children}
+      </div>
     </div>
   );
 };

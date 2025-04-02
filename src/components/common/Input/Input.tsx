@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useId } from 'react'
 import './Input.scss';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+  label: string;
   value: string;
   onValueChange: (value: string) => void;
-  small?: boolean;
+  smallLabel?: boolean;
+  smallInput?: boolean;
 }
 
 export const Input: React.FC<InputProps> = ({
   value,
-  small,
+  label,
+  smallLabel,
+  smallInput,
   onValueChange,
   ...props
 }) => {
@@ -17,13 +21,26 @@ export const Input: React.FC<InputProps> = ({
     onValueChange(e.target.value);
   };
 
+  const inputId = useId();
+
   return (
-    <div className={`input-container ${small ? 'input-container__small' : ''}`}>
-      <input
-        value={value}
-        onChange={handleChange}
-        {...props}
-      />
-    </div>
+    <>
+      <label
+          className={`input__label ${smallLabel ? 'input__label_small' : ''}`}
+          htmlFor={inputId}
+      >
+        {label}
+      </label>
+
+      <div className={`input__container ${smallInput ? 'input__container_small' : ''}`}>
+        <input
+          id={inputId}
+          className="input__field"
+          value={value}
+          onChange={handleChange}
+          {...props}
+        />
+      </div>
+    </>
   );
 };
