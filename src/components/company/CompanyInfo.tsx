@@ -12,6 +12,7 @@ import { DeleteCompanyModal } from './DeleteCompanyModal/DeleteCompanyModal';
 import './CompanyInfo.scss';
 
 export const CompanyInfo = observer(() => {
+  const [loading, setLoading] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -20,28 +21,38 @@ export const CompanyInfo = observer(() => {
   const [editError, setEditError] = useState<string | null>(null);
 
   useEffect(() => {
-    companyStore.fetchCompanyData(COMPANY_ID, CONTACT_ID);
+    const loadData = async () => {
+      try {
+        setLoading(true);
+        await companyStore.fetchCompanyData(COMPANY_ID, CONTACT_ID);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadData();
   }, []);
 
-  if (companyStore.loading && (!companyStore.company || !companyStore.contact)) {
+  if (loading && (!companyStore.company || !companyStore.contact)) {
     return <div className="company__loading">Loading...</div>;
   }
 
-  if (companyStore.error || !companyStore.company || !companyStore.contact) {
-    return <div className="company__error">{companyStore.error || 'Data not found'}</div>;
+  if (!companyStore.company || !companyStore.contact) {
+    return <div className="company__error">{'Data not found'}</div>;
   }
 
   const handleSaveName = async (newName: string) => {
     try {
       setIsSaving(true);
       setEditError(null);
+
       await companyStore.updateCompany({
-        ...companyStore.company,
         name: newName
       });
+
       setIsEditModalOpen(false);
-    } catch (error) {
-      setEditError(companyStore.error || 'Failed to update company name');
+    } catch {
+      setEditError('Failed to update company name');
     } finally {
       setIsSaving(false);
     }
@@ -56,8 +67,9 @@ export const CompanyInfo = observer(() => {
     try {
       setIsDeleting(true);
       setDeleteError(null);
+
       await companyStore.deleteCompany();
-    } catch (error) {
+    } catch {
       setDeleteError('Failed to delete organization. Please try again.');
     } finally {
       setIsDeleting(false);

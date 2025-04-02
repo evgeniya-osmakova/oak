@@ -38,11 +38,11 @@ export const Contacts = observer(() => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (contact) {
       const [firstname, lastname] = editedData.fullName.trim().split(' ');
 
-      companyStore.updateContact({
+      await companyStore.updateContact({
         ...contact,
         firstname: firstname || '',
         lastname: lastname || '',

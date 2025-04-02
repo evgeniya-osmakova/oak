@@ -62,13 +62,13 @@ export const Details = observer(() => {
     setIsEditing(true);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (company) {
       // Parse the date from DD.MM.YYYY to ISO format
       const [day, month, year] = editedData.contract.issue_date.split('.');
       const isoDate = day && month && year ? `${year}-${month}-${day}T00:00:00Z` : '';
 
-      companyStore.updateCompany({
+      await companyStore.updateCompany({
         name: editedData.name,
         shortName: editedData.shortName,
         contract: {
@@ -79,6 +79,7 @@ export const Details = observer(() => {
         type: editedData.type
       });
     }
+
     setIsEditing(false);
   };
 
