@@ -5,7 +5,7 @@ import { Input } from '../../common/Input/Input';
 import { Select } from '../../common/Select/Select';
 import { companyStore } from '../../../stores/CompanyStore';
 
-import './EditableContent.scss';
+import './EditableContent.sass';
 
 const BUSINESS_ENTITY_OPTIONS = [
   { value: 'Sole Proprietorship', label: 'Sole Proprietorship' },

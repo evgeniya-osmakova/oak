@@ -9,7 +9,7 @@ import { EditNameModal } from './EditNameModal/EditNameModal'
 import { IconButton } from '../../components/common/IconButton/IconButton';
 import { DeleteCompanyModal } from './DeleteCompanyModal/DeleteCompanyModal';
 
-import './CompanyInfo.scss';
+import './CompanyInfo.sass';
 
 export const CompanyInfo = observer(() => {
   const [loading, setLoading] = useState(false);

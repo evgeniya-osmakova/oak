@@ -4,7 +4,7 @@ import { CompanyInfo } from './components/company/CompanyInfo';
 import { Sidebar } from './components/Sidebar/Sidebar';
 import { authStore } from './stores/AuthStore';
 import './styles/global.scss';
-import './App.scss';
+import './App.sass';
 
 const App = observer(() => {
   useEffect(() => {

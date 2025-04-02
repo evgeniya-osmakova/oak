@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal } from '../../common/Modal/Modal';
 import { Button } from '../../common/Button/Button';
-import './DeleteCompanyModal.scss';
+import './DeleteCompanyModal.sass';
 
 interface DeleteCompanyModalProps {
   isOpen: boolean;

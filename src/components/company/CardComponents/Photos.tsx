@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
-import { Icon } from '../../common/Icon/Icon';
 import { companyStore } from '../../../stores/CompanyStore';
 import { Button } from '../../common/Button/Button'
 
-import './Photos.scss';
+import './Photos.sass';
 
 export const Photos = observer(() => {
     const fileInputRef = useRef<HTMLInputElement>(null);

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { iconName } from '../../common/Icon/Icon';
 import { Button } from '../../common/Button/Button'
 
-import './Card.scss';
+import './Card.sass';
 
 interface CardProps {
   title: string;

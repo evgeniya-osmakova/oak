@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, iconName } from '../Icon/Icon';
-import './IconButton.scss';
+
+import './IconButton.sass';
 
 interface IconButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   iconName: iconName;

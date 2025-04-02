@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../../common/Modal/Modal';
 import { Button } from '../../common/Button/Button';
-import './EditNameModal.scss';
+import './EditNameModal.sass';
 
 interface EditNameModalProps {
   isOpen: boolean;

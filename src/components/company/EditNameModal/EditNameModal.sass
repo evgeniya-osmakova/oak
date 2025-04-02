@@ -1,0 +1,51 @@
+@import '../../../styles/variables'
+
+.edit-name
+  display: flex
+  flex-direction: column
+  gap: 24px
+  height: 100%
+
+  &__input
+    width: 100%
+    height: 40px
+    padding: 8px 12px
+    border: 1px solid $black-20
+    border-radius: 8px
+    font-family: 'Poppins', sans-serif
+    font-size: 14px
+    font-weight: 400
+    line-height: 24px
+    letter-spacing: 0.3px
+    color: $black-80
+    transition: all 0.2s ease
+
+    &:focus
+      outline: none
+      border-color: $brand-secondary
+
+    &::placeholder
+      color: $black-40
+
+    &:disabled
+      background: $black-5
+      color: $black-60
+      cursor: not-allowed
+
+  &__error
+    font-family: 'Poppins', sans-serif
+    font-size: 14px
+    font-weight: 400
+    line-height: 24px
+    letter-spacing: 0.3px
+    color: $error-color
+    padding: 8px 12px
+    background: $error-bg
+    border-radius: 8px
+    margin-top: -12px
+    text-align: center
+
+  &__actions
+    display: flex
+    gap: 12px
+    margin-top: auto 

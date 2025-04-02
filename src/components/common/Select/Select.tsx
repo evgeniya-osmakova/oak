@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useId } from 'react'
 import { Icon } from '../Icon/Icon';
-import './Select.scss';
+import './Select.sass';
 
 interface SelectOption {
   value: string;

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Icon, iconName } from '../common/Icon/Icon'
-import './Sidebar.scss';
+import './Sidebar.sass';
 import { Button } from '../common/Button/Button'
 
 export const Sidebar = () => {

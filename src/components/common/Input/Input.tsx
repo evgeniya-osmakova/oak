@@ -1,5 +1,6 @@
 import React, { useId } from 'react'
-import './Input.scss';
+
+import './Input.sass';
 
 interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
   label: string;

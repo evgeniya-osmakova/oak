@@ -3,7 +3,8 @@ import { observer } from 'mobx-react-lite';
 import { Card } from '../Card/Card';
 import { Input } from '../../common/Input/Input';
 import { companyStore } from '../../../stores/CompanyStore';
-import './EditableContent.scss';
+
+import './EditableContent.sass';
 
 interface EditedData {
   firstname: string;
